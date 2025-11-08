@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delicious Bites Restaurant</title>
+<link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+<!-- LOGIN PAGE -->
+<div class="auth-container" id="login-page" style="display:flex;">
+    <div class="auth-box">
+        <h2>Login</h2>
+        <input type="text" id="login-user" placeholder="Username" required>
+        <input type="password" id="login-pass" placeholder="Password" required>
+        <button onclick="login()">Login</button>
+        <p>Don't have an account? <a href="#" onclick="showSignup()">Sign up</a></p>
+    </div>
+</div>
+
+<!-- SIGNUP PAGE -->
+<div class="auth-container" id="signup-page">
+    <div class="auth-box">
+        <h2>Sign Up</h2>
+        <input type="text" id="signup-user" placeholder="Username" required>
+        <input type="email" id="signup-email" placeholder="Email" required>
+        <input type="password" id="signup-pass" placeholder="Password" required>
+        <input type="password" id="signup-confirm" placeholder="Confirm Password" required>
+        <button onclick="signup()">Sign Up</button>
+        <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+    </div>
+</div>
+
+<!-- MAIN SITE -->
+<div id="main-site" style="display:none;">
+<header>
+    <h1>🍴 Delicious Bites Restaurant</h1>
+    <p>Serving Happiness Since 2020</p>
+</header>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#menu">Menu</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<section class="hero" id="home">
+    <h1>Welcome to Delicious Bites</h1>
+</section>
+
+<section class="menu" id="menu">
+    <h2>Our Special Menu</h2>
+    <div class="menu-items">
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1732223229355-95a1433404bf?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=987" alt="Pizza">
+            <h3>Cheese Pizza</h3>
+            <p>₹199</p>
+        </div>
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1550547660-d9450f859349" alt="Burger">
+            <h3>Mushroom Burger</h3>
+            <p>₹149</p>
+        </div>
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe" alt="Pasta">
+            <h3>White Sauce Pasta</h3>
+            <p>₹179</p>
+        </div>
+    </div>
+</section>
+
+<section class="about" id="about">
+    <h2>About Us</h2>
+    <p>At Delicious Bites, we serve freshly made food with love and care. Visit us for a cozy dining experience!</p>
+</section>
+
+<section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea rows="4" placeholder="Your Message"></textarea>
+        <button type="submit">Send</button>
+    </form>
+    <p>📞 98765-43210 | 📍 Chandigarh, India</p>
+</section>
+
+<footer>
+    <p>&copy; 2025 Delicious Bites | Designed by Shubham</p>
+</footer>
+</div>
+<script>
+function showSignup() {
+    document.getElementById('login-page').style.display = 'none';
+    document.getElementById('signup-page').style.display = 'flex';
+}
+function showLogin() {
+    document.getElementById('signup-page').style.display = 'none';
+    document.getElementById('login-page').style.display = 'flex';
+}
+function signup() {
+    const user = document.getElementById('signup-user').value;
+    const email = document.getElementById('signup-email').value;
+    const pass = document.getElementById('signup-pass').value;
+    const confirm = document.getElementById('signup-confirm').value;
+
+    if (!user || !email || !pass || !confirm) {
+        alert('Please fill all fields.');
+        return;
+    }
+    if (pass !== confirm) {
+        alert('Passwords do not match!');
+        return;
+    }
+
+    localStorage.setItem('username', user);
+    localStorage.setItem('email', email);
+    localStorage.setItem('password', pass);
+
+    alert('Signup successful! Please login.');
+    showLogin();
+}
+function login() {
+    const user = document.getElementById('login-user').value;
+    const pass = document.getElementById('login-pass').value;
+    const storedUser = localStorage.getItem('username');
+    const storedPass = localStorage.getItem('password');
+
+    if (user === storedUser && pass === storedPass) {
+        document.getElementById('login-page').style.display = 'none';
+        document.getElementById('main-site').style.display = 'block';
+    } else {
+        alert('Invalid credentials!');
+    }
+}
+</script>
+
+</body>
+</html>
